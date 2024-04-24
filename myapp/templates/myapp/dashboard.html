@@ -62,7 +62,13 @@
         </div>
     </div>
 </div>
+
 <!-- Link to the JavaScript file -->
 <script src="{% static 'js/script.js' %}"></script>
+<script type="text/javascript">
+    var obstacleData = {{ obstacle_data|safe }};
+    var grayscaleData = {{ grayscale_data|safe }};
+</script>
+
 </body>
 </html>

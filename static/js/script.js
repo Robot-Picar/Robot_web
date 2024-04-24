@@ -9,14 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Canvas Drawing
-    const obstacleCanvas = document.getElementById('obstacle-canvas');
-    const obstacleCtx = obstacleCanvas.getContext('2d');
-    const grayscaleCanvas = document.getElementById('grayscale-canvas');
-    const grayscaleCtx = grayscaleCanvas.getContext('2d');
-
+    const obstacleCtx = document.getElementById('obstacle-canvas').getContext('2d');
+    const grayscaleCtx = document.getElementById('grayscale-canvas').getContext('2d');
+    
     // Draw on Canvas
-    drawObstacles(obstacleCtx);
-    applyGrayscale(grayscaleCtx);
+    drawObstacles(obstacleCtx, obstacleData);
+    applyGrayscale(grayscaleCtx, grayscaleData);
 
     // Mileage Reset Button
     const mileageValue = document.getElementById('mileage-value');
@@ -44,23 +42,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function drawObstacles(ctx) {
+function drawObstacles(ctx, data) {
     console.log("Drawing obstacles...");
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = '#e74c3c';
-    let obstacles = [{x: 150, y: 75, radius: 10}];
-    obstacles.forEach(function(obstacle) {
-        ctx.beginPath();
-        ctx.arc(obstacle.x, obstacle.y, obstacle.radius, 0, Math.PI * 2);
-        ctx.fill();
-    });
+    ctx.fillStyle = data.detected ? 'red' : '#e74c3c';  // Red if detected
+    ctx.beginPath();
+    ctx.arc(data.x, data.y, data.radius, 0, Math.PI * 2);
+    ctx.fill();
 }
 
-function applyGrayscale(ctx) {
+function applyGrayscale(ctx, data) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = '#bdc3c7';
+    if (data.blackLineDetected) {
+        ctx.fillStyle = 'black';
+    } else if (data.cliffDetected) {
+        ctx.fillStyle = 'grey';
+    } else {
+        ctx.fillStyle = 'white';
+    }
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
+
 
 function setupArrowButtonInteractivity() {
     const btnUp = document.getElementById('btn-up');
