@@ -8,19 +8,31 @@
     <title>Dashboard Interface</title>
     <!-- Link to the stylesheet -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
 <div class="dashboard">
     <div class="menu-panel">
         <!-- Menu buttons -->
-        <button id="btn-ultrasonic">Ultrasonic</button>
-        <button id="btn-grayscale">Grayscale</button>
+        <button id="btn-ultrasonic"><i class="fas fa-satellite-dish"></i> Ultrasonic</button>
+        <button id="btn-grayscale"><i class="fas fa-adjust"></i> Grayscale</button>
+        <button id="btn-location"><i class="fas fa-map-marker-alt"></i> Location</button>
         <!-- Other buttons can be added here -->
     </div>
+
+    <div id="location-display" style="color: white; padding: 10px;">
+        Location: <span id="location-info">Awaiting location...</span>
+    </div>
+    
     <div class="first-column">
         <div class="speed-monitor" id="speed-monitor">
-            <span id="speed-value">18m/s</span>
+            <div class="speed-dial">
+                <div class="speed-needle" id="speed-needle" style="transform: rotate(0deg);"></div>
+            </div>
+            <div class="speed-value" id="speed-value">15m/s</div>
         </div>
+        
         <div class="mileage" id="mileage">
             <span id="mileage-value">725cm</span>
             <button id="btn-reset">Reset</button>
@@ -32,17 +44,18 @@
     </div>
     <div class="second-column">
         <div class="obstacle-monitor" id="obstacle-monitor">
-            <canvas id="obstacle-canvas" width="300" height="150"></canvas>
+            <canvas id="obstacle-canvas" width="200" height="100"></canvas>
         </div>
         <div class="grayscale-monitor" id="grayscale-monitor">
-            <canvas id="grayscale-canvas" width="300" height="150"></canvas>
+            <canvas id="grayscale-canvas" width="200" height="100"></canvas>
         </div>
     </div>
     <div class="third-column">
         <div class="power-regulator" id="power-regulator">
-            <input type="range" id="power-level" min="0" max="100" value="50">
             <label for="power-level" id="power-value">50%</label>
+            <input type="range" id="power-level" min="0" max="100" value="50"> 
         </div>
+        
         <div class="arrow-keys left-right">
             <button id="btn-left">◀</button>
             <button id="btn-right">▶</button>

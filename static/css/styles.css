@@ -1,4 +1,3 @@
-
 /* Base reset and styles */
 * {
     box-sizing: border-box;
@@ -16,8 +15,8 @@ body, html {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr; /* Three columns with the middle column being the widest */
     grid-template-rows: auto 1fr auto; /* Defining rows for menu, content, and controls */
-    gap: 50px; /* Space between grid items */
-    padding: 50px;
+    gap: 15px; /* Space between grid items */
+    padding: 15px;
     color: rgba(27, 250, 157, 0.658);
 }
 
@@ -30,88 +29,93 @@ body, html {
     gap: 10px; /* Space between buttons */
 }
 
-/* Styles for menu buttons - assuming the use of FontAwesome for icons */
 .menu-panel button {
     background-color: transparent;
     border: none;
-    color: rgba(205, 3, 255, 0.723);
-    font-size: 1em; /* Larger icons */
+    color: rgba(241, 233, 62, 0.935);
+    font-size: 1em;
     cursor: pointer;
+    padding: 10px;  /* Add padding for better touch interaction */
+    display: flex;
+    align-items: center; /* Aligns icon and text vertically */
 }
 
-/* First column layout */
-.first-column {
+.menu-panel button .fa {
+    margin-right: 5px;  /* Adds some space between the icon and the text */
+    color: inherit;  /* Ensures the icon uses the button's text color */
+    font-size: 1em; /* Adjust size as needed */
+    color: #fff; /* Adjust color as needed, or use 'inherit' to take the button's color */
+}
+
+.menu-panel button i {
+    margin-right: 5px;  /* Adds space between the icon and text */
+}
+
+
+#btn-location .fa {
+    margin-right: 5px;  /* Space between icon and text */
+    color: #ffffff;  /* Icon color */
+}
+
+#location-display {
+    grid-column: 1 / -1;  /* Ensure it spans all columns if your layout is grid-based */
+    text-align: center;  /* Center the text */
+}
+
+
+.first-column, .second-column, .third-column {
     display: flex;
     flex-direction: column;
     gap: 150px;
     align-items: center; /* Center items horizontally */
 }
 
-/* Second column layout */
-.second-column {
-    display: flex;
-    flex-direction: column;
-    gap: 150px;
-}
-
-/* Third column layout */
 .third-column {
-    display: flex;
-    flex-direction: column;
-    gap: 300px;
-    align-items: center;
+    gap: 330px; /* Larger gap in the third column */
 }
 
-/* Info panel styles */
-.info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
+/* Obstacle and Grayscale Monitor Styles */
+.obstacle-monitor, .grayscale-monitor {
+    width: 500px; /* Ensure full width of the column */
+    height: auto; /* Adjust height automatically */
+    background-color: #89d6e9; /* Light gray background to make elements visible */
 }
 
-/* Power regulator styles */
-.power-regulator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+canvas {
+    width: 100%; /* Full width */
+    height: 200px; /* Fixed height for visibility */
 }
 
-/* Adjustments to the power-level slider */
+
 #power-level {
-    width: 200px; /* Set a fixed width */
+    width: 500px; /* Set a fixed width */
 }
 
-/* General control button styles */
 .control button {
-    background: #21a371; /* The blue color for buttons */
+    background: #40d79d; /* The blue color for buttons */
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
-    color: rgb(168, 36, 36);
+    color: rgb(36, 164, 168);
     cursor: pointer;
     font-size: 1em;
 }
 
-/* Monitor styles */
-.monitor canvas {
-    width: 100%; /* Full width of the column */
-    height: auto;
-    background-color: #1cb697; /* The light gray background for canvases */
-}
-
-/* Arrow keys layout adjustments */
+/* Arrow keys styles */
 .arrow-keys {
     display: flex;
     justify-content: center;
 }
 
-/* Special classes for up-down and left-right arrow keys */
+.arrow-keys button {
+    width: 80px; /* Set the width of the arrow buttons */
+    height: 80px; /* Set the height of the arrow buttons */
+}
+
 .up-down, .left-right {
     flex-direction: column; /* Stacking the buttons vertically */
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .dashboard {
         grid-template-columns: 1fr; /* Stack everything in one column on small screens */
@@ -131,3 +135,101 @@ body, html {
         flex-direction: row; /* Arrow keys in a row on small screens */
     }
 }
+
+/* Additional Visibility Debugging Styles */
+.obstacle-monitor {
+    border: 2px solid rgb(48, 46, 46); /* Red border to highlight the monitor area for debugging */
+}
+
+/* Speed monitor styles */
+.speed-monitor {
+    position: relative;
+    width: 200px; /* Set your preferred size */
+    height: 100px;
+    background: #3498db;
+    border-radius: 100px 100px 0 0;
+    overflow: hidden;
+}
+
+.speed-dial {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px; /* Same as .speed-monitor width */
+    height: 100px; /* Half of .speed-monitor width */
+    background: #0fe089;
+    border-radius: 100px;
+    transform: translate(-50%, -50%);
+}
+
+.speed-needle {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    height: 90px; /* Slightly less than half of .speed-dial height */
+    background-color: #e74c3c;
+    transform-origin: bottom;
+    /* The rotation will be set by JavaScript if dynamic behavior is desired */
+}
+
+.speed-value {
+    position: absolute;
+    bottom: 10px; /* Distance from bottom of .speed-monitor */
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+    color: rgb(26, 28, 27);
+}
+/* Style for the percentage label */
+#power-value {
+    position: absolute;
+    padding-top: 50px;
+    top: -30px; /* Position the label above the slider */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px; /* Set font size */
+    color: #fff; /* Set font color */
+    z-index: 2; /* Ensure it's above the slider */
+}
+
+/* Power Regulator Styles */
+.power-regulator {
+    position: relative; /* Use relative positioning as a reference for absolute children */
+    padding-top: 80px; /* Add padding to make room for the label above */
+}
+
+/* Customize the slider track */
+#power-level {
+    -webkit-appearance: none; /* Override default range input appearance */
+    appearance: none;
+    width: 100%; /* Full width */
+    height: 15px; /* Height of the track */
+    border-radius: 5px;
+    background: #3498db; /* Background color of the track */
+    outline: none;
+}
+
+/* Customize the slider thumb for Webkit browsers */
+#power-level::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    margin-top: -5px; /* Adjust this to center thumb vertically */
+}
+
+/* Customize the slider thumb for Mozilla browsers */
+#power-level::-moz-range-thumb {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+
+
