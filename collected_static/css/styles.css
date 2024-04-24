@@ -16,17 +16,17 @@ body, html {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr; /* Three columns with the middle column being the widest */
     grid-template-rows: auto 1fr auto; /* Defining rows for menu, content, and controls */
-    gap: 50px; /* Space between grid items */
-    padding: 50px;
-    color: rgba(27, 250, 157, 0.658);
+    gap: 20px; /* Space between grid items */
+    padding: 20px;
+    color: white;
 }
 
 /* Menu panel styles */
 .menu-panel {
     grid-column: 1 / -1; /* Menu panel spans all columns */
     display: flex;
-    justify-content: right;
-    align-items: right;
+    justify-content: start;
+    align-items: center;
     gap: 10px; /* Space between buttons */
 }
 
@@ -34,8 +34,8 @@ body, html {
 .menu-panel button {
     background-color: transparent;
     border: none;
-    color: rgba(205, 3, 255, 0.723);
-    font-size: 1em; /* Larger icons */
+    color: white;
+    font-size: 1.5em; /* Larger icons */
     cursor: pointer;
 }
 
@@ -43,7 +43,7 @@ body, html {
 .first-column {
     display: flex;
     flex-direction: column;
-    gap: 150px;
+    gap: 10px;
     align-items: center; /* Center items horizontally */
 }
 
@@ -51,14 +51,14 @@ body, html {
 .second-column {
     display: flex;
     flex-direction: column;
-    gap: 150px;
+    gap: 10px;
 }
 
 /* Third column layout */
 .third-column {
     display: flex;
     flex-direction: column;
-    gap: 300px;
+    gap: 10px;
     align-items: center;
 }
 
@@ -67,7 +67,7 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 5px;
 }
 
 /* Power regulator styles */
@@ -84,11 +84,11 @@ body, html {
 
 /* General control button styles */
 .control button {
-    background: #21a371; /* The blue color for buttons */
+    background: #3498db; /* The blue color for buttons */
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
-    color: rgb(168, 36, 36);
+    color: white;
     cursor: pointer;
     font-size: 1em;
 }
@@ -97,7 +97,7 @@ body, html {
 .monitor canvas {
     width: 100%; /* Full width of the column */
     height: auto;
-    background-color: #1cb697; /* The light gray background for canvases */
+    background-color: #ecf0f1; /* The light gray background for canvases */
 }
 
 /* Arrow keys layout adjustments */
