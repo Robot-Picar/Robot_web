@@ -1,0 +1,45 @@
+/* Power Regulator Styles */
+.power-regulator {
+    position: relative; /* Use relative positioning as a reference for absolute children */
+    padding-top: 80px; /* Add padding to make room for the label above */
+}
+
+#power-level {
+    -webkit-appearance: none; /* Override default range input appearance */
+    appearance: none;
+    width: 100%; /* Full width */
+    height: 15px; /* Height of the track */
+    border-radius: 5px;
+    background: #3498db; /* Background color of the track */
+    outline: none;
+}
+
+#power-level::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    margin-top: -5px; /* Adjust this to center thumb vertically */
+}
+
+#power-level::-moz-range-thumb {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+#power-value {
+    position: absolute;
+    padding-top: 50px;
+    top: -30px; /* Position the label above the slider */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px; /* Set font size */
+    color: #fff; /* Set font color */
+    z-index: 2; /* Ensure it's above the slider */
+}

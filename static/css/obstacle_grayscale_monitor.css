@@ -1,0 +1,16 @@
+/* Obstacle and Grayscale Monitor Styles */
+.obstacle-monitor, .grayscale-monitor {
+    width: 500px; /* Ensure full width of the column */
+    height: auto; /* Adjust height automatically */
+    background-color: #89d6e9; /* Light gray background to make elements visible */
+}
+
+canvas {
+    width: 100%; /* Full width */
+    height: 200px; /* Fixed height for visibility */
+}
+
+/* Additional Visibility Debugging Styles */
+.obstacle-monitor {
+    border: 2px solid rgb(48, 46, 46); /* Red border to highlight the monitor area for debugging */
+}

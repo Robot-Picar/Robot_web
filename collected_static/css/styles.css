@@ -1,4 +1,3 @@
-
 /* Base reset and styles */
 * {
     box-sizing: border-box;
@@ -16,102 +15,94 @@ body, html {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr; /* Three columns with the middle column being the widest */
     grid-template-rows: auto 1fr auto; /* Defining rows for menu, content, and controls */
-    gap: 20px; /* Space between grid items */
-    padding: 20px;
-    color: white;
+    gap: 15px; /* Space between grid items */
+    padding: 15px;
+    color: rgba(27, 250, 157, 0.658);
 }
 
 /* Menu panel styles */
 .menu-panel {
     grid-column: 1 / -1; /* Menu panel spans all columns */
     display: flex;
-    justify-content: start;
-    align-items: center;
+    justify-content: right;
+    align-items: right;
     gap: 10px; /* Space between buttons */
 }
 
-/* Styles for menu buttons - assuming the use of FontAwesome for icons */
 .menu-panel button {
     background-color: transparent;
     border: none;
-    color: white;
-    font-size: 1.5em; /* Larger icons */
+    color: rgba(241, 233, 62, 0.935);
+    font-size: 1em;
     cursor: pointer;
+    padding: 10px;  /* Add padding for better touch interaction */
+    display: flex;
+    align-items: center; /* Aligns icon and text vertically */
 }
 
-/* First column layout */
-.first-column {
+.menu-panel button .fa {
+    margin-right: 5px;  /* Adds some space between the icon and the text */
+    color: inherit;  /* Ensures the icon uses the button's text color */
+    font-size: 1em; /* Adjust size as needed */
+    color: #fff; /* Adjust color as needed, or use 'inherit' to take the button's color */
+}
+
+.menu-panel button i {
+    margin-right: 5px;  /* Adds space between the icon and text */
+}
+
+
+#btn-location .fa {
+    margin-right: 5px;  /* Space between icon and text */
+    color: #ffffff;  /* Icon color */
+}
+
+#location-display {
+    grid-column: 1 / -1;  /* Ensure it spans all columns if your layout is grid-based */
+    text-align: center;  /* Center the text */
+}
+
+
+.first-column, .second-column, .third-column {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 150px;
     align-items: center; /* Center items horizontally */
 }
 
-/* Second column layout */
-.second-column {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Third column layout */
 .third-column {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+    gap: 330px; /* Larger gap in the third column */
 }
 
-/* Info panel styles */
-.info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-/* Power regulator styles */
-.power-regulator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Adjustments to the power-level slider */
 #power-level {
-    width: 200px; /* Set a fixed width */
+    width: 500px; /* Set a fixed width */
 }
 
-/* General control button styles */
 .control button {
-    background: #3498db; /* The blue color for buttons */
+    background: #40d79d; /* The blue color for buttons */
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
-    color: white;
+    color: rgb(36, 164, 168);
     cursor: pointer;
     font-size: 1em;
 }
 
-/* Monitor styles */
-.monitor canvas {
-    width: 100%; /* Full width of the column */
-    height: auto;
-    background-color: #ecf0f1; /* The light gray background for canvases */
-}
-
-/* Arrow keys layout adjustments */
+/* Arrow keys styles */
 .arrow-keys {
     display: flex;
     justify-content: center;
 }
 
-/* Special classes for up-down and left-right arrow keys */
+.arrow-keys button {
+    width: 80px; /* Set the width of the arrow buttons */
+    height: 80px; /* Set the height of the arrow buttons */
+}
+
 .up-down, .left-right {
     flex-direction: column; /* Stacking the buttons vertically */
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .dashboard {
         grid-template-columns: 1fr; /* Stack everything in one column on small screens */
@@ -131,3 +122,4 @@ body, html {
         flex-direction: row; /* Arrow keys in a row on small screens */
     }
 }
+

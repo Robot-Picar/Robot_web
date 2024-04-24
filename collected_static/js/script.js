@@ -5,64 +5,93 @@ document.addEventListener('DOMContentLoaded', function() {
     
     powerRegulator.addEventListener('input', function(event) {
         powerValue.textContent = `${event.target.value}%`;
+        updateSpeed(event.target.value); // Linking the power level to speed dynamically
     });
 
-    // Canvas Drawing
-    const obstacleCanvas = document.getElementById('obstacle-canvas');
-    const obstacleCtx = obstacleCanvas.getContext('2d');
-    const grayscaleCanvas = document.getElementById('grayscale-canvas');
-    const grayscaleCtx = grayscaleCanvas.getContext('2d');
+    // Canvas Drawing for obstacle and grayscale
+    const obstacleCtx = document.getElementById('obstacle-canvas').getContext('2d');
+    const grayscaleCtx = document.getElementById('grayscale-canvas').getContext('2d');
+    
+    // Assuming obstacleData and grayscaleData are defined or fetched elsewhere in your project
+    drawObstacles(obstacleCtx, obstacleData);
+    applyGrayscale(grayscaleCtx, grayscaleData);
 
-    // Draw on Canvas
-    drawObstacles(obstacleCtx);
-    applyGrayscale(grayscaleCtx);
-
-    // Mileage Reset Button
+    // Resetting mileage data
     const mileageValue = document.getElementById('mileage-value');
     document.getElementById('btn-reset').addEventListener('click', function() {
         mileageValue.textContent = '0cm';
     });
 
-    // Arrow Key Button Functionality
+    // Arrow keys interactivity
     setupArrowButtonInteractivity();
+
+    // Enhancing location retrieval with user guidance and error handling
+    document.getElementById('btn-location').addEventListener('click', function() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(displayLocation, handleLocationError, {timeout: 10000});
+        } else {
+            updateLocationInfo('Geolocation is not supported by your browser. Please check your browser settings.');
+        }
+    });
 });
 
-function drawObstacles(ctx) {
-    // Example drawing function for obstacles
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear canvas for redrawing
-    ctx.fillStyle = '#e74c3c';
-    // Imagine an array of obstacles represented as objects with x and y properties
-    let obstacles = [{x: 150, y: 75, radius: 10}]; // This should be dynamic
-    obstacles.forEach(function(obstacle) {
-        ctx.beginPath();
-        ctx.arc(obstacle.x, obstacle.y, obstacle.radius, 0, Math.PI * 2);
-        ctx.fill();
-    });
+function displayLocation(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    updateLocationInfo(`Latitude: ${lat}, Longitude: ${lon}`);
 }
 
-function applyGrayscale(ctx) {
-    // Example grayscale effect
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear canvas for redrawing
-    ctx.fillStyle = '#bdc3c7';
+function handleLocationError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            updateLocationInfo('Location permission was denied. Please enable it in your browser settings to use this feature.');
+            break;
+        case error.POSITION_UNAVAILABLE:
+            updateLocationInfo('Location information is currently unavailable. Please check your network or GPS settings.');
+            break;
+        case error.TIMEOUT:
+            updateLocationInfo('The request to get location timed out. Please try again.');
+            break;
+        default:
+            updateLocationInfo('An unknown error occurred while retrieving location.');
+            break;
+    }
+    console.error("Error Code = " + error.code + " - " + error.message);
+}
+
+function updateLocationInfo(message) {
+    document.getElementById('location-info').textContent = message;
+}
+
+function drawObstacles(ctx, data) {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = data.detected ? 'red' : '#e74c3c';  // Change color if detected
+    ctx.beginPath();
+    ctx.arc(data.x, data.y, data.radius, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+function applyGrayscale(ctx, data) {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = data.blackLineDetected ? 'black' : (data.cliffDetected ? 'grey' : 'white');
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
 
 function setupArrowButtonInteractivity() {
-    // Setup for arrow keys interactivity
-    const btnUp = document.getElementById('btn-up');
-    const btnDown = document.getElementById('btn-down');
-    const btnLeft = document.getElementById('btn-left');
-    const btnRight = document.getElementById('btn-right');
-
-    // Assigning event listeners
-    btnUp.addEventListener('click', function() { handleArrowPress('up'); });
-    btnDown.addEventListener('click', function() { handleArrowPress('down'); });
-    btnLeft.addEventListener('click', function() { handleArrowPress('left'); });
-    btnRight.addEventListener('click', function() { handleArrowPress('right'); });
+    ['btn-up', 'btn-down', 'btn-left', 'btn-right'].forEach(buttonId => {
+        document.getElementById(buttonId).addEventListener('click', () => handleArrowPress(buttonId.replace('btn-', '')));
+    });
 }
 
 function handleArrowPress(direction) {
-    // Handle the logic for arrow button press
     console.log(`${direction} pressed`);
-    // You would have additional logic here to do something when an arrow key is pressed
+    // Add further functionality if needed
+}
+
+function updateSpeed(value) {
+    const speedValueElement = document.getElementById('speed-value');
+    const speedNeedleElement = document.getElementById('speed-needle');
+    speedValueElement.textContent = `${value}m/s`;
+    let rotationDegrees = (value / 100) * 180; // Calculate the degree of needle rotation
+    speedNeedleElement.style.transform = `rotate(${rotationDegrees - 90}deg)`;
 }
