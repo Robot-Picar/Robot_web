@@ -1,10 +1,12 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Interface</title>
+    <!-- Link to the stylesheet -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -13,7 +15,7 @@
         <!-- Menu buttons -->
         <button id="btn-ultrasonic">Ultrasonic</button>
         <button id="btn-grayscale">Grayscale</button>
-        <!-- ... other buttons ... -->
+        <!-- Other buttons can be added here -->
     </div>
     <div class="first-column">
         <div class="speed-monitor" id="speed-monitor">
@@ -47,6 +49,7 @@
         </div>
     </div>
 </div>
+<!-- Link to the JavaScript file -->
 <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

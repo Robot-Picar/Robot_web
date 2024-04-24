@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os  # Ensure this import is added at the top if not already present
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'myapp',  # add this line
+    'django.contrib.staticfiles',  # Make sure this is included
+    'myapp',  # Your custom app
 ]
 
 MIDDLEWARE = [
@@ -116,7 +117,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+# Ensure that Django can find the static files on the filesystem.
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Correct path where your static files are located
+]
+
+# Define where collected static files will be stored.
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
