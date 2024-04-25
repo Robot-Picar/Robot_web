@@ -1,17 +1,20 @@
 // power_regulator.js
+
 document.addEventListener('DOMContentLoaded', function() {
-    const batteryRegulator = document.getElementById('battery-level');
-    const batteryValue = document.getElementById('battery-value');
+    const batteryLevel = document.getElementById('battery-level');
+    const powerValue = document.getElementById('power-value'); // Ensures this element exists in HTML
     
-    batteryRegulator.addEventListener('input', function(event) {
-        batteryValue.textContent = `${event.target.value}%`;
+    batteryLevel.addEventListener('input', function(event) {
+        powerValue.textContent = `${event.target.value}%`;
         updateBatteryDisplay(event.target.value);
     });
 });
 
 function updateBatteryDisplay(value) {
     const batteryIndicator = document.getElementById('battery-indicator');
-    let batteryHeight = (value / 100) * 100;
-    batteryIndicator.style.height = `${batteryHeight}%`;
-    batteryIndicator.textContent = `${value}% Battery`;
+    if (batteryIndicator) { // Check if the element exists
+        let batteryHeight = value; // Simplified, assuming you want to set the height directly
+        batteryIndicator.style.height = `${batteryHeight}%`;
+        batteryIndicator.textContent = `${value}% Battery`;
+    }
 }
