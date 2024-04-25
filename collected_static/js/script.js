@@ -21,9 +21,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('btn-path').addEventListener('click', () => toggleFunctionality('Path'));
 });
 
+// Setup event listeners for arrow button clicks to control the robot
 function setupArrowButtonInteractivity() {
-    ['btn-up', 'btn-down', 'btn-left', 'btn-right'].forEach(buttonId => {
-        document.getElementById(buttonId).addEventListener('click', () => handleArrowPress(buttonId.replace('btn-', '')));
+    const controlButtons = document.querySelectorAll('.arrow-keys button');
+    controlButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const command = this.getAttribute('data-command');
+            fetch(`/control/${command}/`)
+                .then(response => response.json())
+                .then(data => console.log('Command status: ', data))
+                .catch(error => console.error('Error sending command:', error));
+        });
     });
 }
 

@@ -26,7 +26,7 @@ body, html {
     display: flex;
     justify-content: flex-end; /* Aligns menu items to the right */
     align-items: center;
-    gap: 20px; /* Space between buttons */
+    gap: 10px; /* Space between buttons */
     flex-wrap: wrap; /* Allows menu items to wrap onto the next line if space requires */
 }
 
@@ -44,7 +44,6 @@ body, html {
 .menu-panel button i {
     margin-right: 5px; /* Adds space between the icon and text */
 }
-
 .date-time {
     color: #fff; /* White color for date-time for visibility */
     font-size: 1em;
@@ -54,19 +53,21 @@ body, html {
 #location-display {
     grid-column: 1 / -1;  /* Ensure it spans all columns */
     text-align: center;  /* Center the text */
+    color: #fff; /* Ensuring visibility */
+    margin-top: 10px; /* Margin for spacing */
 }
 
 .first-column, .second-column {
     display: flex;
     flex-direction: column;
-    gap: 100px;
+    gap: 50px; /* Reduced gap for tighter layout */
     align-items: center; /* Center items horizontally */
 }
 
 .third-column {
     display: flex;
     flex-direction: column;
-    gap: 200px;
+    gap: 100px; /* Reduced gap for tighter layout */
     align-items: center; /* Center items horizontally */
 }
 
@@ -74,6 +75,7 @@ body, html {
 .arrow-keys {
     display: flex;
     justify-content: center;
+    margin-top: 20px; /* Extra margin for better spacing */
 }
 
 .arrow-keys button {
@@ -93,8 +95,6 @@ body, html {
     transform: scale(1.1); /* Slightly increase size on hover */
 }
 
-
-
 @media (max-width: 768px) {
     .dashboard {
         grid-template-columns: 1fr; /* Stack everything in one column on small screens */
@@ -110,6 +110,6 @@ body, html {
     }
     
     .arrow-keys {
-        flex-direction: row; /* Arrow keys in a row on small screens */
+        flex-direction: column; /* Arrow keys in a column for easier access on mobile */
     }
 }
