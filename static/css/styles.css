@@ -24,9 +24,10 @@ body, html {
 .menu-panel {
     grid-column: 1 / -1; /* Menu panel spans all columns */
     display: flex;
-    justify-content: right;
-    align-items: right;
+    justify-content: flex-end; /* Aligns menu items to the right */
+    align-items: center;
     gap: 20px; /* Space between buttons */
+    flex-wrap: wrap; /* Allows menu items to wrap onto the next line if space requires */
 }
 
 .menu-panel button {
@@ -55,12 +56,14 @@ body, html {
     gap: 100px;
     align-items: center; /* Center items horizontally */
 }
+
 .third-column {
     display: flex;
     flex-direction: column;
     gap: 200px;
     align-items: center; /* Center items horizontally */
 }
+
 .arrow-keys {
     display: flex;
     justify-content: center;
