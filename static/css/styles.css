@@ -93,6 +93,8 @@ body, html {
     transform: scale(1.1); /* Slightly increase size on hover */
 }
 
+
+
 @media (max-width: 768px) {
     .dashboard {
         grid-template-columns: 1fr; /* Stack everything in one column on small screens */
