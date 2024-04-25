@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Setup buttons for various functionalities
     document.getElementById('btn-camera').addEventListener('click', () => toggleFunctionality('Camera'));
-    document.getElementById('btn-ultrasonic').addEventListener('click', () => toggleFunctionality('Ultrasonic'));
-    document.getElementById('btn-grayscale').addEventListener('click', () => toggleFunctionality('Grayscale'));
     document.getElementById('btn-avoid').addEventListener('click', () => toggleFunctionality('Avoid'));
     document.getElementById('btn-follow').addEventListener('click', () => toggleFunctionality('Follow'));
     document.getElementById('btn-cliff').addEventListener('click', () => toggleFunctionality('Cliff'));
