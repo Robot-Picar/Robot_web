@@ -1,7 +1,7 @@
 /* Power Regulator Styles */
 .power-regulator {
     position: relative; /* Use relative positioning as a reference for absolute children */
-    padding-top: 80px; /* Add padding to make room for the label above */
+    padding-top: 100px; /* Add padding to make room for the label above */
 }
 
 #battery-level {
@@ -35,10 +35,11 @@
 
 #power-value {
     position: absolute;
-    top: -30px; /* Position the label above the slider */
+    top: -5px; /* Position the label above the slider */
     left: 50%;
     transform: translateX(-50%);
     font-size: 18px; /* Set font size */
     color: #fff; /* Set font color */
     z-index: 2; /* Ensure it's above the slider */
+    
 }
