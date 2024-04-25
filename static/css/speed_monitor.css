@@ -6,6 +6,8 @@
     background: #3498db;
     border-radius: 100px 100px 0 0;
     overflow: hidden;
+    border: 2px solid #000; /* Add new border */
+
 }
 
 .speed-dial {
@@ -16,7 +18,7 @@
     height: 100px; /* Half of .speed-monitor width */
     background: #0fe089;
     border-radius: 100px;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(-0.5turn);/*add new rotate*/
 }
 
 .speed-needle {
@@ -27,6 +29,7 @@
     height: 90px; /* Slightly less than half of .speed-dial height */
     background-color: #e74c3c;
     transform-origin: bottom;
+    transform: rotate(0deg); /*new add */
     /* The rotation will be set by JavaScript if dynamic behavior is desired */
 }
 

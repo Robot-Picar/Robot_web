@@ -24,9 +24,10 @@ body, html {
 .menu-panel {
     grid-column: 1 / -1; /* Menu panel spans all columns */
     display: flex;
-    justify-content: right;
-    align-items: right;
+    justify-content: flex-end; /* Aligns menu items to the right */
+    align-items: center;
     gap: 20px; /* Space between buttons */
+    flex-wrap: wrap; /* Allows menu items to wrap onto the next line if space requires */
 }
 
 .menu-panel button {
@@ -44,6 +45,12 @@ body, html {
     margin-right: 5px; /* Adds space between the icon and text */
 }
 
+.date-time {
+    color: #fff; /* White color for date-time for visibility */
+    font-size: 1em;
+    padding: 10px; /* Consistent padding with buttons */
+}
+
 #location-display {
     grid-column: 1 / -1;  /* Ensure it spans all columns */
     text-align: center;  /* Center the text */
@@ -55,21 +62,35 @@ body, html {
     gap: 100px;
     align-items: center; /* Center items horizontally */
 }
+
 .third-column {
     display: flex;
     flex-direction: column;
     gap: 200px;
     align-items: center; /* Center items horizontally */
 }
+
+/* Styles for arrow keys */
 .arrow-keys {
     display: flex;
     justify-content: center;
 }
 
 .arrow-keys button {
-    width: 80px; /* Set the width of the arrow buttons */
-    height: 80px; /* Set the height of the arrow buttons */
+    width: 100px; /* Set the width of the arrow buttons */
+    height: 100px; /* Set the height of the arrow buttons */
     font-size: 40px; /* Larger font size for arrow symbols */
+    background-color: #3498db; /* Example background color */
+    border: 5px solid #2980b9; /* Example border color */
+    border-radius: 50%; /* Makes the button round */
+    cursor: pointer;
+    color: white; /* Text color */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for visual effects */
+}
+
+.arrow-keys button:hover {
+    background-color: #2980b9; /* Darker shade on hover */
+    transform: scale(1.1); /* Slightly increase size on hover */
 }
 
 @media (max-width: 768px) {
