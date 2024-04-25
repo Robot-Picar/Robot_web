@@ -1,11 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Power Regulator Interactivity
-    const powerRegulator = document.getElementById('power-level');
-    const powerValue = document.getElementById('power-value');
+    // Power Regulator Interactivity for Battery Level
+    const batteryRegulator = document.getElementById('battery-level');
+    const batteryValue = document.getElementById('battery-value');
     
-    powerRegulator.addEventListener('input', function(event) {
-        powerValue.textContent = `${event.target.value}%`;
-        updateSpeed(event.target.value); // Linking the power level to speed dynamically
+    batteryRegulator.addEventListener('input', function(event) {
+        batteryValue.textContent = `${event.target.value}%`;
+        updateBatteryDisplay(event.target.value);
+    });
+
+    // Speed Monitor Interactivity for Real-Time Speed
+    const speedRegulator = document.getElementById('speed-level');
+    const speedValue = document.getElementById('speed-value');
+
+    speedRegulator.addEventListener('input', function(event) {
+        speedValue.textContent = `${event.target.value}m/s`;
+        updateSpeedNeedle(event.target.value);
     });
 
     // Canvas Drawing for obstacle and grayscale
@@ -65,7 +74,7 @@ function updateLocationInfo(message) {
 
 function drawObstacles(ctx, data) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = data.detected ? 'red' : '#e74c3c';  // Change color if detected
+    ctx.fillStyle = data.detected ? 'red' : '#e74c3c';
     ctx.beginPath();
     ctx.arc(data.x, data.y, data.radius, 0, Math.PI * 2);
     ctx.fill();
@@ -88,10 +97,15 @@ function handleArrowPress(direction) {
     // Add further functionality if needed
 }
 
-function updateSpeed(value) {
-    const speedValueElement = document.getElementById('speed-value');
-    const speedNeedleElement = document.getElementById('speed-needle');
-    speedValueElement.textContent = `${value}m/s`;
-    let rotationDegrees = (value / 100) * 180; // Calculate the degree of needle rotation
-    speedNeedleElement.style.transform = `rotate(${rotationDegrees - 90}deg)`;
+function updateBatteryDisplay(value) {
+    const batteryIndicator = document.getElementById('battery-indicator');
+    let batteryHeight = (value / 100) * 100;
+    batteryIndicator.style.height = `${batteryHeight}%`;
+    batteryIndicator.textContent = `${value}% Battery`;
+}
+
+function updateSpeedNeedle(value) {
+    const speedNeedle = document.getElementById('speed-needle');
+    let rotationDegrees = (value / 100) * 180;
+    speedNeedle.style.transform = `rotate(${rotationDegrees - 90}deg)`;
 }
