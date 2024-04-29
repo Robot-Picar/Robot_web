@@ -13,7 +13,7 @@ class CommandConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         command = text_data_json['command']
 
-        # Send command to Raspberry Pi
+        # Here you send the command to the Raspberry Pi
         response = await self.send_command_to_pi(command)
         await self.send(text_data=json.dumps({
             'status': response.get('status', 'error'),

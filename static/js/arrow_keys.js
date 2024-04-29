@@ -1,34 +1,47 @@
-// Establish a WebSocket connection to the server
 var websocket;
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Open a WebSocket within the same host
+    // Initialize a WebSocket connection to the Django server
     websocket = new WebSocket('ws://' + window.location.host + '/ws/control/');
 
-    // Event listener for when a message is received from the server
+    // Define what happens when a message is received from the server
     websocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         console.log('Command status: ', data);
     };
 
-    // Error handling for the WebSocket connection
+    // Handle any errors that occur with the WebSocket connection
     websocket.onerror = function(e) {
         console.error('WebSocket error:', e);
     };
 
-    // Set up the arrow key interactivity
-    setupArrowButtonInteractivity();
+    // Listen for keydown events on the entire document to capture arrow key presses
+    document.addEventListener('keydown', function(event) {
+        handleKeyPress(event.key);
+    });
 });
 
-// Set up event listeners for arrow button clicks to control the robot
-function setupArrowButtonInteractivity() {
-    const controlButtons = document.querySelectorAll('.arrow-keys button');
-    controlButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Retrieve the command from the data-command attribute
-            const command = this.getAttribute('data-command');
-            // Send the command as a JSON string through the WebSocket
-            websocket.send(JSON.stringify({'command': command}));
-        });
-    });
+// This function maps key presses to specific robot commands and sends them over the WebSocket
+function handleKeyPress(key) {
+    let command = null;
+    switch(key) {
+        case 'ArrowUp':    // Arrow Up key for moving forward
+            command = 'forward';
+            break;
+        case 'ArrowDown':  // Arrow Down key for moving backward
+            command = 'backward';
+            break;
+        case 'ArrowLeft':  // Arrow Left key for turning left
+            command = 'turn_left';
+            break;
+        case 'ArrowRight': // Arrow Right key for turning right
+            command = 'turn_right';
+            break;
+        default:
+            return; // If any other key is pressed, ignore it
+    }
+    // If a valid command is determined, send it as a JSON string through the WebSocket
+    if (command) {
+        websocket.send(JSON.stringify({'command': command}));
+    }
 }
