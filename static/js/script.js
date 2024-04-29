@@ -10,9 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         mileageValue.textContent = '0cm';
     });
 
-    // Setup arrow keys interactivity
-    setupArrowButtonInteractivity();
-
     // Setup buttons for various functionalities
     document.getElementById('btn-camera').addEventListener('click', () => toggleFunctionality('Camera'));
     document.getElementById('btn-avoid').addEventListener('click', () => toggleFunctionality('Avoid'));
@@ -20,20 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('btn-cliff').addEventListener('click', () => toggleFunctionality('Cliff'));
     document.getElementById('btn-path').addEventListener('click', () => toggleFunctionality('Path'));
 });
-
-// Setup event listeners for arrow button clicks to control the robot
-function setupArrowButtonInteractivity() {
-    const controlButtons = document.querySelectorAll('.arrow-keys button');
-    controlButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const command = this.getAttribute('data-command');
-            fetch(`/control/${command}/`)
-                .then(response => response.json())
-                .then(data => console.log('Command status: ', data))
-                .catch(error => console.error('Error sending command:', error));
-        });
-    });
-}
 
 function handleArrowPress(direction) {
     console.log(`${direction} pressed`);

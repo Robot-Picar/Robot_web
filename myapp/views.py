@@ -2,6 +2,13 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
 import os
+import requests
+
+def send_command_to_pi(command):
+    url = 'http://RASPBERRY_PI_IP:5000/command'
+    data = {'command': command}
+    response = requests.post(url, json=data)
+    return response.json()
 
 def dashboard(request):
     # Fetches data to be displayed on the dashboard. Here, 'request' might be used

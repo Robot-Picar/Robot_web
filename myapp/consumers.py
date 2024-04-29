@@ -1,7 +1,8 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
+import requests
 
-class RobotConsumer(AsyncWebsocketConsumer):
+class CommandConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
 
@@ -9,10 +10,19 @@ class RobotConsumer(AsyncWebsocketConsumer):
         pass
 
     async def receive(self, text_data):
-        data = json.loads(text_data)
-        command = data['command']
-        # Send command to Raspberry Pi via HTTP/MQTT here
+        text_data_json = json.loads(text_data)
+        command = text_data_json['command']
 
+        # Send command to Raspberry Pi
+        response = await self.send_command_to_pi(command)
         await self.send(text_data=json.dumps({
-            'response': 'Command received'
+            'status': response.get('status', 'error'),
+            'command': command
         }))
+
+    @staticmethod
+    async def send_command_to_pi(command):
+        url = 'http://RASPBERRY_PI_IP:5000/command'
+        data = {'command': command}
+        response = requests.post(url, json=data)
+        return response.json()
